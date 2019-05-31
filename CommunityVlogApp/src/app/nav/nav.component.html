@@ -1,4 +1,41 @@
-<header class="blog-header py-3">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Community Icon</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="loggedOut()">Logout</a>
+      </li>
+      
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown">
+      <button class="btn btn-secondary text-light">
+        Dropdown button
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" class="fa fa-user">Edit Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" class="fa fa-sign-out">Logout</a>
+      </div>
+    </div>
+
+    <form *ngIf="!loggedIn()" #loginform="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
+      <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
+      <button [disabled]="!loginform.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+</nav>
+
+<!-- <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1">
       <a class="text-muted" href="#">Subscribe</a>
@@ -29,4 +66,4 @@
     <a class="p-2 text-muted" href="#">Style</a>
     <a class="p-2 text-muted" href="#">Travel</a>
   </nav>
-</div>
+</div> -->

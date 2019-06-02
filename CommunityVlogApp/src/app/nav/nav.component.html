@@ -15,10 +15,10 @@
       </ul>
   
       <div *ngIf="loggedIn()" class="dropdown" dropdown>
-        <button class="btn btn-secondary dropdown-toggle text-light" dropdownToggle>
+        <button class="btn dropdown-toggle text-light" dropdownToggle>
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </button>
-        <div class="dropdown-menu mt-3" *dropdownMenu>
+        <div class="dropdown-menu mt-1 text-center" *dropdownMenu>
           <a class="dropdown-item" href="#" class="fa fa-user">Edit Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="loggedOut()" class="fa fa-sign-out">Logout</a>

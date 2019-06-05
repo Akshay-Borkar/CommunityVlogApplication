@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
@@ -13,12 +13,20 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_service/error.interceptor';
 import { AlertifyService } from './_service/alertify.service';
-import { MembersComponent } from './members/members.component';
+import { MembersComponent } from './member/members/members.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_service/user.service';
+import { MemberCardsComponent } from './member/member-cards/member-cards.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailComponent } from './member/member-detail/member-detail.component';
+
+export function tokenGetter(){
+   return localStorage.getItem('Item');
+}
 
 @NgModule({
    declarations: [
@@ -29,20 +37,31 @@ import { AuthGuard } from './_guards/auth.guard';
       RegisterComponent,
       MembersComponent,
       ListsComponent,
-      MessagesComponent
+      MessagesComponent,
+      MemberCardsComponent,
+      MemberDetailComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      }),
+      TabsModule
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      UserService
    ],
    bootstrap: [
       AppComponent

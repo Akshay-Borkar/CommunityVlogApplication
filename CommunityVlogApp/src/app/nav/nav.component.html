@@ -18,10 +18,10 @@
         <button class="btn dropdown-toggle text-light" dropdownToggle>
           Welcome {{authService.decodedToken?.unique_name | titlecase}}
         </button>
-        <div class="dropdown-menu mt-1 text-center" *dropdownMenu>
-          <a class="dropdown-item" href="#" class="fa fa-user">Edit Profile</a>
+        <div class="dropdown-menu mt-1" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="loggedOut()" class="fa fa-sign-out">Logout</a>
+          <a class="dropdown-item" (click)="loggedOut()"><i class="fa fa-sign-out"></i>Logout</a>
         </div>
       </div>
   

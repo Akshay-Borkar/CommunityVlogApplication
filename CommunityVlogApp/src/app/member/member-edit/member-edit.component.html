@@ -1,7 +1,7 @@
 <br><br><br>
 <div class="container mt-4">
   <div class="row ml-4">
-    <h1>{{user.knownAs}}'s Profile.</h1>
+    <h1>Your Profile.</h1>
   </div>
   <div class="row">
     <div class="col-sm-4">
@@ -38,20 +38,33 @@
             </h4>
             <p>{{user.lookingFor}}</p>
           </tab>
-          <tab heading="Interests">
-            <h4 class="mt-4">
-              Interests
-            </h4>
-            <p>{{user.interest}}</p>            
+          <tab heading="Edit Profile">
+            <form>
+              <h4>Description</h4>
+              <textarea name="selfIntroduction" rows="6" class="form-control"
+              [(ngModel)]="user.selfIntroduction"></textarea>
+              <h4>Interest</h4>
+              <textarea name="interest" rows="6" class="form-control"
+              [(ngModel)]="user.interest"></textarea>
+              <h4>Looking For</h4>
+              <textarea name="lookingFor" rows="6" class="form-control"
+              [(ngModel)]="user.lookingFor"></textarea>
+              <h4>Location Details:</h4>
+              <div>
+                <label for="city">City</label>
+                <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
+                <label for="state">State</label>
+                <input type="text" class="form-control" name="state" [(ngModel)]="user.state">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+              </div>
+            </form>          
           </tab>
-          <tab heading="Photos">
+          <tab heading="Edit Photos">
             <h4 class="mt-4"></h4>
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>            
+            <p>Your photos will be here.</p>           
           </tab>
-          <tab heading="Messages">
-            <h4 class="mt-4"></h4>
-            <p>Messages will go here.</p>            
-          </tab>
+          
         </tabset>
       </div>
     </div>

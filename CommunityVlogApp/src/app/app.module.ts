@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { UserService } from './_service/user.service';
 import { MemberCardsComponent } from './member/member-cards/member-cards.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './member/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MembersResolver } from './_resolvers/member.resolver';
 
 export function tokenGetter(){
    return localStorage.getItem('Item');
@@ -54,14 +57,17 @@ export function tokenGetter(){
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       }),
-      TabsModule
+      TabsModule.forRoot(),
+      NgxGalleryModule
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
+      MemberDetailResolver,
+      MembersResolver
    ],
    bootstrap: [
       AppComponent

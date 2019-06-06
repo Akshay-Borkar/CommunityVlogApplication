@@ -3,16 +3,16 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user?.photoUrl}}" alt="{{user?.knownAs}}">
+        <img class="card-img-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div><strong>Location:</strong></div>
-          <p>{{user?.city}}, {{user?.state}}, {{user?.country}}</p>
+          <p>{{user.city}}, {{user.state}}, {{user.country}}</p>
           <div><strong>Age:</strong></div>
-          <p>{{user?.age}}</p>
+          <p>{{user.age}}</p>
           <div><strong>Last Active:</strong></div>
-          <p>{{user?.lastActive}}</p>
+          <p>{{user.lastActive}}</p>
           <div><strong>Member since:</strong></div>
-          <p>{{user?.created}}</p>
+          <p>{{user.created}}</p>
           <div class="card-footer">
             <div class="btn-group d-flex">
                 <button class="btn btn-primary w-100">Like</button>
@@ -23,7 +23,34 @@
       </div>
     </div>
     <div class="col-sm-8">
-
+      <div class="tab-panel">
+        <tabset class="member-tabset">
+          <tab heading="About {{user.knownAs}}">
+            <h4 class="mt-4">
+              Description
+            </h4>
+            <p>{{user.selfIntroduction}}</p>
+            <h4>
+              Looking for
+            </h4>
+            <p>{{user.lookingFor}}</p>
+          </tab>
+          <tab heading="Interests">
+            <h4 class="mt-4">
+              Interests
+            </h4>
+            <p>{{user.interest}}</p>            
+          </tab>
+          <tab heading="Photos">
+            <h4 class="mt-4"></h4>
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>            
+          </tab>
+          <tab heading="Messages">
+            <h4 class="mt-4"></h4>
+            <p>Messages will go here.</p>            
+          </tab>
+        </tabset>
+      </div>
     </div>
   </div>
 </div>

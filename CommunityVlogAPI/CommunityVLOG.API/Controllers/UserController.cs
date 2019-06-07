@@ -6,6 +6,7 @@ using CommunityVLOG.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CommunityVLOG.API.Controllers
 {
@@ -35,6 +36,21 @@ namespace CommunityVLOG.API.Controllers
             var user = await _repo.GetUser(id);
             var userToReturn = _map.Map<UserForDetailDto>(user);
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto){
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userFromRepo = await _repo.GetUser(id);
+
+            _map.Map(userForUpdateDto, userFromRepo);
+            
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            throw new  KeyNotFoundException($"Updating user {id} failed on save");
         }
     }
 }

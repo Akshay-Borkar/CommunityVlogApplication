@@ -12,5 +12,6 @@ namespace CommunityVLOG.API.Data.CommunityRepository
          Task<IEnumerable<User>> GetUsers();
          Task<User> GetUser(int id);
          Task<Photo> GetPhoto(int id);
+         Task<Photo> GetMainPhoto(int id);
     }
 }

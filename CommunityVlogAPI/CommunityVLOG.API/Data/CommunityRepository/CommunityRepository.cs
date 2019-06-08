@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityVLOG.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace CommunityVLOG.API.Data.CommunityRepository
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
+        }
+
+        public async Task<Photo> GetMainPhoto(int id)
+        {
+            return await _context.Photos.Where(u => u.UserId == id).FirstOrDefaultAsync(p => p.IsMainPhots);
         }
 
         public async Task<Photo> GetPhoto(int id)

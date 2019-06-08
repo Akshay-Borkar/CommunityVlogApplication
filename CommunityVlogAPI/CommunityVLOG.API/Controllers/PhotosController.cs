@@ -31,12 +31,13 @@ namespace CommunityVLOG.API.Controllers
             _repo = repo;
 
             Account acc = new Account(
+                _cloudinaryConfigs.Value.CloudName,
                 _cloudinaryConfigs.Value.ApiKey,
-                _cloudinaryConfigs.Value.ApiSecret,
-                _cloudinaryConfigs.Value.CloudName
+                _cloudinaryConfigs.Value.ApiSecret
+                
             );
             
-            _cloudinary = new Cloudinary();
+            _cloudinary = new Cloudinary(acc);
 
         }
 
@@ -50,7 +51,7 @@ namespace CommunityVLOG.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoForCreationDto){
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photoForCreationDto){
             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 

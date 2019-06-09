@@ -20,9 +20,9 @@
           <div><strong>Age:</strong></div>
           <p>{{user.age}}</p>
           <div><strong>Last Active:</strong></div>
-          <p>{{user.lastActive}}</p>
+          <p>{{user.lastActive | timeAgo}}</p>
           <div><strong>Member since:</strong></div>
-          <p>{{user.created}}</p>
+          <p>{{user.created | date: 'mediumDate'}}</p>
           <div class="card-footer">
               <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save changes</button>
           </div>

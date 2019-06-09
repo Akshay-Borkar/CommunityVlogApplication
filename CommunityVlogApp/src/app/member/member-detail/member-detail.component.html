@@ -13,9 +13,9 @@
           <div><strong>Age:</strong></div>
           <p>{{user.age}}</p>
           <div><strong>Last Active:</strong></div>
-          <p>{{user.lastActive}}</p>
+          <p>{{user.lastActive | timeAgo}}</p>
           <div><strong>Member since:</strong></div>
-          <p>{{user.created}}</p>
+          <p>{{user.created | date: 'mediumDate'}}</p>
           <div class="card-footer">
             <div class="btn-group d-flex">
                 <button class="btn btn-primary w-100">Like</button>

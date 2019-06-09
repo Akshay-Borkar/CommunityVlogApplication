@@ -40,8 +40,9 @@ export class AuthService {
     );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    debugger;
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   loggedIn(){

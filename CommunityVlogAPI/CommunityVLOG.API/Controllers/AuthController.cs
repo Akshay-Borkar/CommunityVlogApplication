@@ -39,14 +39,13 @@ namespace CommunityVLOG.API.Controllers
                 return BadRequest("Username already exist!");
 
 
-            var userToCreate = new User
-            {
-                UserName = userForRegisterDto.UserName
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new { controller = "User", id = createdUser.Id }, userToReturn);
         }
 
         [HttpPost("login")]

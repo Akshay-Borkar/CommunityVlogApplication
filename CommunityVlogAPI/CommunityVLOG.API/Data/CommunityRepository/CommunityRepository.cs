@@ -56,7 +56,7 @@ namespace CommunityVLOG.API.Data.CommunityRepository
                 var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
                 var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-                user = user.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob)
+                user = user.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
             }
 
             return await PageList<User>.CreateAsync(user, userParams.PageNumber, userParams.PageSize);

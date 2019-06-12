@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityVLOG.API.Helpers;
 using CommunityVLOG.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,10 +43,10 @@ namespace CommunityVLOG.API.Data.CommunityRepository
             return user;            
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var user = await _context.Users.Include(p => p.Photos).ToListAsync();
-            return user;
+            var user = _context.Users.Include(p => p.Photos);
+            return await PageList<User>.CreateAsync(user, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

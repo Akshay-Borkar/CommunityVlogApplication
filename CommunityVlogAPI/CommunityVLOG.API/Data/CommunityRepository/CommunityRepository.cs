@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,7 +46,19 @@ namespace CommunityVLOG.API.Data.CommunityRepository
 
         public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var user = _context.Users.Include(p => p.Photos);
+            var user = _context.Users.Include(p => p.Photos).AsQueryable();
+            
+            user = user.Where(u => u.Id != userParams.UserId);
+
+            user = user.Where(u => u.Gender == userParams.Gender);
+
+            if(userParams.MinAge != 18 || userParams.MaxAge != 99 ){
+                var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+                var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+                user = user.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob)
+            }
+
             return await PageList<User>.CreateAsync(user, userParams.PageNumber, userParams.PageSize);
         }
 

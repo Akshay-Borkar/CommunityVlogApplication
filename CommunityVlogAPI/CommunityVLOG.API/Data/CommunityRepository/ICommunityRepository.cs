@@ -14,5 +14,6 @@ namespace CommunityVLOG.API.Data.CommunityRepository
          Task<User> GetUser(int id);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhoto(int id);
+         Task<Like> GetLike(int userId, int recipientId);
     }
 }

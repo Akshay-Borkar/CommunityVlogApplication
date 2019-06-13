@@ -46,7 +46,7 @@ namespace CommunityVLOG.API.Data.CommunityRepository
 
         public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var user = _context.Users.Include(p => p.Photos).AsQueryable();
+            var user = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
             
             user = user.Where(u => u.Id != userParams.UserId);
 
@@ -57,6 +57,18 @@ namespace CommunityVLOG.API.Data.CommunityRepository
                 var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
                 user = user.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            }
+
+            if(!string.IsNullOrEmpty(userParams.OrderBy)){
+                switch(userParams.OrderBy){
+                    case "created":
+                        user = user.OrderByDescending(u => u.Created);
+                        break;
+
+                    default:
+                        user = user.OrderByDescending(u => u.LastActive);
+                        break;
+                }
             }
 
             return await PageList<User>.CreateAsync(user, userParams.PageNumber, userParams.PageSize);

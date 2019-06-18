@@ -27,11 +27,19 @@ namespace CommunityVLOG.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{id}")]
-        public IActionResult GetValue(int id)
+        [HttpGet("{str}")]
+        public IActionResult GetValue(string str)
         {
-            var value = _context.Values.FirstOrDefault(x => x.Id == id);
-            return Ok(value);
+            List<string> listy = new List<string>();
+            listy.Add("one");
+            listy.Add("two");
+
+            var strVal = 
+            from strArr in listy
+            where strArr.Contains(str)
+            select strArr;
+
+            return Ok(strVal);
         }
 
         // GET api/values

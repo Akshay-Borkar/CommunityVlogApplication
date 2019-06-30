@@ -1,0 +1,24 @@
+<br><br><br>
+<p>
+  SearchFilterComponent works!
+</p>
+
+<div class="container">
+    <div style="text-align:center">
+      <!-- <div class="input" contenteditable="true" [(formControl)]="queryField" placeholder="search" id="myInput" autofocus></div>
+        <ul id="myUL">
+            <li *ngFor="let result of results" (click)="onClick($event)">
+                <a>{{result}}</a>
+                </li>
+        </ul> -->
+        <textarea-expanded [(formControl)]="queryField"></textarea-expanded>
+        <!-- <input class="input" [(formControl)]="queryField" contenteditable="true"/> -->
+        <ul>
+            <li *ngFor="let result of results" (click)="onClick($event)">
+                <a>{{result}}</a>
+                </li>
+        </ul>
+      </div>
+</div>
+  
+  

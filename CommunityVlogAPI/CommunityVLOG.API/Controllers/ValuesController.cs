@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CommunityVLOG.API.Data;
+using CommunityVLOG.API.Data.CommunityRepository;
+using CommunityVLOG.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,33 +17,51 @@ namespace CommunityVLOG.API.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly DataContext _context;
-        public ValuesController(DataContext context)
+        private readonly ICommunityRepository _repo;
+        private readonly IMapper _map;
+
+        public ValuesController(DataContext context, ICommunityRepository repo, IMapper map)
         {
-            _context = context;            
+            _context = context;
+            _repo = repo;
+            _map = map;
         }
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var value = _context.Values.ToList();
-            return Ok(value);
+            var users = await _repo.fetchUsers();
+            var usersToReturn = _map.Map<IEnumerable<UserForListDto>>(users);
+
+            return Ok(usersToReturn);
+            // return Ok(listy);
         }
 
         [AllowAnonymous]
-        [HttpGet("{str}")]
-        public IActionResult GetValue(string str)
-        {
-            List<string> listy = new List<string>();
-            listy.Add("one");
-            listy.Add("two");
-
-            var strVal = 
-            from strArr in listy
-            where strArr.Contains(str)
-            select strArr;
-
-            return Ok(strVal);
+        [HttpGet]
+        [Route("GetMember")]
+        public async Task<IActionResult> GetMember(string memberId){
+            int id = Convert.ToInt32(memberId);
+            var user = await _repo.GetUser(id);
+            var userToReturn = _map.Map<UserForDetailDto>(user);
+            return Ok(userToReturn);
         }
+
+        // [AllowAnonymous]
+        // [HttpGet("{str}")]
+        // public IActionResult GetValue(string str)
+        // {
+        //     List<string> listy = new List<string>();
+        //     listy.Add("one");
+        //     listy.Add("two");
+
+        //     var strVal = 
+        //     from strArr in listy
+        //     where strArr.Contains(str)
+        //     select strArr;
+
+        //     return Ok(strVal);
+        // }
 
         // GET api/values
         // [HttpGet]

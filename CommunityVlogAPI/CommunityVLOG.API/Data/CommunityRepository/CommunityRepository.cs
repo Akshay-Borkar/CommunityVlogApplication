@@ -88,6 +88,13 @@ namespace CommunityVLOG.API.Data.CommunityRepository
             return await PageList<User>.CreateAsync(user, userParams.PageNumber, userParams.PageSize);
         }
 
+        public async Task<List<User>> fetchUsers()
+        {
+            var user = await _context.Users.Include(p => p.Photos).ToListAsync();
+
+            return user;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;

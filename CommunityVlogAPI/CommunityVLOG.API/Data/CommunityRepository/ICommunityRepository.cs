@@ -12,6 +12,7 @@ namespace CommunityVLOG.API.Data.CommunityRepository
          Task<bool> SaveAll();
          Task<PageList<User>> GetUsers(UserParams userParams);
          Task<User> GetUser(int id);
+         Task<List<User>> fetchUsers();
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhoto(int id);
          Task<Like> GetLike(int userId, int recipientId);

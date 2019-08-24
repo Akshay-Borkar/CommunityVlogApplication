@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
   }
 
   getValues() {
-    this.http.get('http://localhost:5000/api/values').subscribe(response => {
-      this.values = JSON.parse(JSON.stringify(response));
-      console.log(response);
-    }, error => {
-      console.log(error);
-    });
+    // this.http.get('http://localhost:5000/api/values').subscribe(response => {
+    //   this.values = JSON.parse(JSON.stringify(response));
+    //   console.log(response);
+    // }, error => {
+    //   console.log(error);
+    // });
 
   }
 

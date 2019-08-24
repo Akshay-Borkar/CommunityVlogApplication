@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
       <a class="navbar-brand" [routerLink]="['/home']" >Community Icon</a>
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
@@ -14,7 +14,7 @@
         
       </ul>
   
-      <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <div class="dropdown" dropdown>
         <span>
           <img src="{{photoUrl || '../../../../assets/user.png'}}" alt="">
         </span>
@@ -36,37 +36,237 @@
   </div>
   
 
-</nav>
+</nav> -->
 
-<!-- <header class="blog-header py-3">
-  <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 pt-1">
-      <a class="text-muted" href="#">Subscribe</a>
+<!-- New Navbar -->
+
+<!-- Navigation -->
+<div id="home">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a href="index.html" class="navbar-brand">MeKoshti</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" *ngIf="!loggedIn()">
+                    <li class="nav-item">
+                        <a href="#Home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#About" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Team" class="nav-link">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#ContactUs" class="nav-link">Contact Us</a>
+                    </li>
+                </ul>
+
+                <ul *ngIf="loggedIn()" class="navbar-nav ml-auto">
+                    <li class="nav-item" routerLinkActive="active">
+                      <a class="nav-link" [routerLink]="['/members']" >Members</a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                      <a class="nav-link" [routerLink]="['/list']" >List</a>
+                    </li>
+                    <!-- <li class="nav-item" routerLinkActive="active">
+                        <a href="#ContactUs" class="nav-link">Contact Us</a>
+                    </li> -->
+                    
+                  </ul>
+
+                <div *ngIf="loggedIn()" class="dropdown" dropdown>
+                    <span>
+                      <img src="{{photoUrl || '../../../../assets/user.png'}}" height="50px" width="50px" alt="">
+                    </span>
+                    <button class="btn dropdown-toggle text-light" dropdownToggle>
+                      Welcome {{authService.decodedToken?.unique_name | titlecase}}
+                    </button>
+                    <div class="dropdown-menu mt-1" *dropdownMenu>
+                      <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i>Edit Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="loggedOut()"><i class="fa fa-sign-out"></i>Logout</a>
+                    </div>
+                  </div>
+
+                  <form *ngIf="!loggedIn()" #loginform="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+                      <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username" required [(ngModel)]="model.username">
+                      <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password" required [(ngModel)]="model.password">
+                      <button [disabled]="!loginform.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                    </form>
+            </div>
+        </nav>
+</div>
+
+<!--- Image Slider -->
+<div *ngIf="!loggedIn()">
+    <div id="idCrouselIndicators" class="carousel slide" data-ride="carousel" data-interval="7000">
+        <ol class="carousel-indicators">
+            <li data-target="#idCrouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#idCrouselIndicators" data-slide-to="1"></li>
+            <li data-target="#idCrouselIndicators" data-slide-to="2"></li>
+        </ol>
+        
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active" style="background: url('./assets/images/background.png') no-repeat center center fixed; background-size: cover;">
+                <div class="carousel-caption text-center">
+                    <h1>Wellcome to Koshti Samaj</h1>
+                    <h3>Koshti samaj blogs</h3>
+                    <a href="#Team" class="btn btn-outline-light btn-lg">Get started</a>
+                </div>
+            </div>
+        
+            <div class="carousel-item" style="background: url('./assets/img/Slider-1.jpg') no-repeat center center fixed; background-size: cover;">
+                <!-- <div class="carousel-caption text-center">
+                    <h1>Wellcome to Koshti Samaj</h1>
+                    <h3>Koshti samaj blogs</h3>
+                    <a href="#Team" class="btn btn-outline-light btn-lg">Get started</a>
+                </div> -->
+            </div>
+        
+            <div class="carousel-item" style="background: url('./assets/images/background2.png') no-repeat center center fixed; background-size: cover;">
+                <!-- <div class="carousel-caption text-center">
+                    <h1>Wellcome to Koshti Samaj</h1>
+                    <h3>Koshti samaj blogs</h3>
+                    <a href="#Team" class="btn btn-outline-light btn-lg">Get started</a>
+                </div> -->
+            </div>
+            <!-- pre and next buton -->
+            <a href="#idCrouselIndicators" class="carousel-control-prev" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a href="#idCrouselIndicators" class="carousel-control-next" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+        </div>
+</div>
+
+
+<!--- Jumbotron -->
+<div id="About" class="offset" *ngIf="!loggedIn()">
+<div class="jumbotron container-fluid">
+<div class="col-12 text-center">
+    <h3 class="heading">
+        Portfolio
+    </h3>
+    <div class="heading-underline"></div>
+</div>
+    <div class="row no-padding">
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/Port.jpg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/Port1.jpg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/Port2.jpg" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/team1.png" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/team2.png" alt="">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="portfolio">
+                <a href="#" target="_blank">
+                    <img src="../../assets/images/team3.png" alt="">
+                </a>
+            </div>
+        </div>
+
+
+        <div class="narrow text-center">
+            <div class="col-12">
+                <p class="lead">Some text comes here.</p>
+                <a href="#" class="btn btn-secondary btn-md" target="_blank">Bootstrap button</a>
+            </div>
+        </div>
     </div>
-    <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" href="#">Large</a>
+</div>
+</div>
+
+
+<!--- Meet the team -->
+
+<div id="Team" class="offset" *ngIf="!loggedIn()">
+<div class="col-12 text-center">
+    <h3 class="heading">Team</h3>
+    <div class="heading-underline"></div>
+</div>
+
+
+<div class="row padding">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <img src="../../assets/images/JaneDoe.jpg" height="340px" alt="" class="card-img-top">
+            <div class="card-body">
+                <h4>Jane Doe</h4>
+                <p>Jane Doe description</p>
+            </div>
+        </div>
     </div>
-    <div class="col-4 d-flex justify-content-end align-items-center">
-      <a class="text-muted" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-      </a>
-      <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+
+    <div class="col-md-6">
+            <div class="card text-center">
+                <img src="../../assets/images/JhonDoe.png" height="340px" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h4>Jhon Doe</h4>
+                    <p>Jhon Doe description</p>
+                </div>
+            </div>
     </div>
-  </div>
-</header>
-<div class="nav-scroller py-1 mb-2">
-  <nav class="nav d-flex justify-content-between">
-    <a class="p-2 text-muted" href="#">World</a>
-    <a class="p-2 text-muted" href="#">U.S.</a>
-    <a class="p-2 text-muted" href="#">Technology</a>
-    <a class="p-2 text-muted" href="#">Design</a>
-    <a class="p-2 text-muted" href="#">Culture</a>
-    <a class="p-2 text-muted" href="#">Business</a>
-    <a class="p-2 text-muted" href="#">Politics</a>
-    <a class="p-2 text-muted" href="#">Opinion</a>
-    <a class="p-2 text-muted" href="#">Science</a>
-    <a class="p-2 text-muted" href="#">Health</a>
-    <a class="p-2 text-muted" href="#">Style</a>
-    <a class="p-2 text-muted" href="#">Travel</a>
-  </nav>
-</div> -->
+</div>
+</div>
+
+
+<!--- Connect -->
+<div id="ContactUs" class="offset" *ngIf="!loggedIn()">
+<footer>
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+                <img src="" alt=""><p>MeKoshti</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                <strong>Contact Us</strong>
+                <p>9999000090<br>abc@gmail.com</p>
+                <a href="" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                <a href="" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                <a href="" target="_blank"><i class="fa fa-instagram"></i></a>
+        </div>
+        <hr class="socket">
+        &copy; Akshay
+    </div>
+</footer>
+</div>
+<!--- Footer -->
+
+

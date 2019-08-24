@@ -35,6 +35,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 import { ListResolver } from './_resolvers/lists.resolver';
 import { SearchFilterComponentComponent } from './SearchFilterComponent/SearchFilterComponent.component';
 import { TextareaExpandedComponent } from './textarea-expanded/textarea-expanded.component';
+import { SignupComponent } from './Signup/Signup.component';
+import { LoginComponent } from './login/login.component';
 
 export function tokenGetter(){
    return localStorage.getItem('Item');
@@ -56,7 +58,9 @@ export function tokenGetter(){
       PhotoEditorComponent,
       SearchFilterComponentComponent,
       TimeAgoPipe,
-      TextareaExpandedComponent
+      TextareaExpandedComponent,
+      SignupComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,
